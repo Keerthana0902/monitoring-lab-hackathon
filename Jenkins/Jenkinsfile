@@ -6,22 +6,34 @@ pipeline {
 
   stages {
     stage('Database') {
-      build job: 'PSDB', parameters: [[$class: 'StringParameterValue', name: 'projectName', value: projectName]]
+      steps{
+        build job: 'PSDB', parameters: [[$class: 'StringParameterValue', name: 'projectName', value: projectName]]
+      }
     }
     stage('DB Monitoring') {
-      build job: 'dbmon', parameters: [[$class: 'StringParameterValue', name: 'projectName', value: projectName]]
+      steps{
+        build job: 'dbmon', parameters: [[$class: 'StringParameterValue', name: 'projectName', value: projectName]]
+      }
     }
     stage('Petclinic') {
+      steps{
       build job: 'petclinic', parameters: [[$class: 'StringParameterValue', name: 'projectName', value: projectName]]
+      }
     }
     stage('Moodle') {
+      steps{
       build job: 'moodle', parameters: [[$class: 'StringParameterValue', name: 'projectName', value: projectName]]
+      }
     }
     stage('Prometheus') {
+      steps{
       build job: 'prometheus', parameters: [[$class: 'StringParameterValue', name: 'projectName', value: projectName]]
+      }
     }
     stage('Grafana') {
+      steps{
       build job: 'grafana', parameters: [[$class: 'StringParameterValue', name: 'projectName', value: projectName]]
+      }
     }
   }
 }
